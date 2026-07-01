@@ -1,0 +1,87 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+// USERS(Admin, Cashier)
+model User {
+  id String @id @default(cuid())
+  name String
+  email String @unique
+  password String
+  role String @default("CASHIER")
+  createdAt DateTime @default(now())
+
+  sales Sale[]
+}
+
+
+// PRODUCTS (STOCK)
+model Product {
+  id String @id @default(cuid())
+  name String
+  sku String @unique
+  buyingPrice Float
+  sellingPrice Float
+  quantity Int @default(0)
+  reorderLevel Int @default(5)
+
+  categoryId String?
+  category Category? @relation(fields: [categoryId], references: [id])
+
+  saleItems SaleItem[]
+
+  createdAt DateTime @default(now())
+}
+
+//CATEGORIES
+model Category {
+  id String @id @default(cuid())
+  name String @unique
+  products Product[]
+  createdAt DateTime @default(now())
+}
+
+//SALES (ONE TRANSACTIONS)
+model Sale {
+  id String @id @default(cuid())
+  total Float
+  createdAt DateTime @default(now())
+
+  userId String
+  user User @relation(fields:[userId], references: [id])
+
+  items SaleItem[]
+}
+
+//SALE ITEM (PRODUCTS IN SALE)
+model SaleItem {
+  id String @id @default(cuid())
+
+  saleId String
+  sale Sale @relation(fields: [saleId], references: [id])
+
+  productId String
+  product Product @relation(fields: [productId], references: [id])
+  
+  quantity Int
+  price Float
+}
+
+//EXPENSES
+
+model Expenses {
+  id String @id @default(cuid())
+  title String
+  amount Float
+  category String?
+  createdAt DateTime @default(now())
+}
