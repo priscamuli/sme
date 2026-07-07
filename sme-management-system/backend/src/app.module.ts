@@ -7,6 +7,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { SalesModule } from './sales/sales.module';
 import { ExpensesModule } from './expenses/expenses.module';
 import { DashboardModule } from './dashboard/dashboard.module';
+import { SettingsModule } from './settings/settings.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
     SalesModule,
     ExpensesModule,
     DashboardModule,
+    SettingsModule,
   ],
   controllers: [AppController],
   providers: [AppService]

@@ -8,8 +8,8 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+   provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 // USERS(Admin, Cashier)
 model User {
@@ -83,5 +83,35 @@ model Expenses {
   title String
   amount Float
   category String?
+  createdAt DateTime @default(now())
+}
+
+//SETTINGS
+model Settings {
+  id String @id @default(cuid())
+
+  businessName String
+  phone String?
+  email String?
+  address String?
+
+  logo String?
+
+  currency String @default("KES")
+
+  taxRate Float @default(0)
+
+  receiptHeader String?
+  receiptFooter String?
+
+  autoPrint Boolean @default(false)
+  printLogo Boolean @default(true)
+
+  reorderLevel Int @default(5)
+
+  lowStockAlert Boolean @default(true)
+
+  enableDiscounts Boolean @default(true)
+
   createdAt DateTime @default(now())
 }

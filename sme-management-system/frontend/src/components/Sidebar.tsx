@@ -1,41 +1,114 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import {
+  HomeIcon,
+  CubeIcon,
+  ShoppingCartIcon,
+  BanknotesIcon,
+  ChartBarIcon,
+  UsersIcon,
+  Cog6ToothIcon,
+} from "@heroicons/react/24/outline";
+
+import logo from "../assets/hero.png";
+
+const menu = [
+  {
+    name: "Dashboard",
+    path: "/dashboard",
+    icon: HomeIcon,
+  },
+  {
+    name: "Products",
+    path: "/products",
+    icon: CubeIcon,
+  },
+  {
+    name: "Sales",
+    path: "/sales",
+    icon: ShoppingCartIcon,
+  },
+  {
+    name: "Expenses",
+    path: "/expenses",
+    icon: BanknotesIcon,
+  },
+  {
+    name: "Reports",
+    path: "/reports",
+    icon: ChartBarIcon,
+  },
+  {
+    name: "Users",
+    path: "/users",
+    icon: UsersIcon,
+  },
+  {
+    name: "Settings",
+    path: "/settings",
+    icon: Cog6ToothIcon,
+  },
+];
 
 export default function Sidebar() {
   return (
-    <aside className="w-64 min-h-screen bg-slate-800 text-white">
-      <div className="p-4 text-xl font-bold border-b border-slate-700">
-        SME System
+    <aside className="w-72 bg-slate-900 text-white min-h-screen shadow-xl">
+
+      {/* Logo */}
+
+      <div className="flex items-center gap-3 px-6 py-6 border-b border-slate-700">
+
+        <img
+          src={logo}
+          alt="MGhetto Retailer"
+          className="w-12 h-12 rounded-lg"
+        />
+
+        <div>
+
+          <h1 className="text-xl font-bold">
+            MGhetto Retailer
+          </h1>
+
+          <p className="text-sm text-slate-400">
+            Retail Management
+          </p>
+
+        </div>
+
       </div>
 
-      <nav className="p-4 space-y-2">
-        <Link
-          to="/dashboard"
-          className="block p-2 rounded hover:bg-slate-700"
-        >
-          Dashboard
-        </Link>
+      <nav className="mt-8 px-4">
 
-        <Link
-          to="/products"
-          className="block p-2 rounded hover:bg-slate-700"
-        >
-          Products
-        </Link>
+        {menu.map((item) => {
 
-        <Link
-          to="/sales"
-          className="block p-2 rounded hover:bg-slate-700"
-        >
-          Sales
-        </Link>
+          const Icon = item.icon;
 
-        <Link
-          to="/expenses"
-          className="block p-2 rounded hover:bg-slate-700"
-        >
-          Expenses
-        </Link>
+          return (
+
+            <NavLink
+              key={item.path}
+              to={item.path}
+              className={({ isActive }) =>
+                `flex items-center gap-4 px-4 py-3 rounded-xl mb-2 transition ${
+                  isActive
+                    ? "bg-blue-600"
+                    : "hover:bg-slate-800"
+                }`
+              }
+            >
+
+              <Icon className="w-6 h-6" />
+
+              <span>{item.name}</span>
+
+            </NavLink>
+
+          );
+
+        })}
+
       </nav>
+
     </aside>
   );
 }

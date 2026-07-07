@@ -1,63 +1,110 @@
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { login } from "../../services/authService";
 
 export default function LoginPage() {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    console.log({
-      email,
-      password,
-    });
+    setError("");
+    setLoading(true);
+
+    try {
+      const data = await login({
+        email,
+        password,
+      });
+
+      localStorage.setItem(
+        "token",
+        data.access_token
+      );
+
+      localStorage.setItem(
+        "user",
+        JSON.stringify(data.user)
+      );
+
+      navigate("/dashboard");
+
+    } catch (err: any) {
+      setError(
+        err.response?.data?.message ||
+        "Login failed"
+      );
+    }
+
+    setLoading(false);
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-screen flex items-center justify-center bg-slate-100">
 
-      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+      <div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-md">
 
-        <h1 className="text-2xl font-bold text-center mb-6">
-          SME Management System
+        <h1 className="text-3xl font-bold text-center mb-2">
+          SME Business Manager
         </h1>
 
-        <form onSubmit={handleSubmit}>
+        <p className="text-center text-gray-500 mb-8">
+          Sign in to continue
+        </p>
 
-          <div className="mb-4">
-            <label className="block mb-2">
-              Email
-            </label>
-
-            <input
-              type="email"
-              className="w-full border rounded p-2"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
+        {error && (
+          <div className="bg-red-100 text-red-700 p-3 rounded mb-4">
+            {error}
           </div>
+        )}
 
-          <div className="mb-4">
-            <label className="block mb-2">
-              Password
-            </label>
+        <form onSubmit={handleLogin}>
 
-            <input
-              type="password"
-              className="w-full border rounded p-2"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
+          <input
+            type="email"
+            placeholder="Email"
+            className="w-full border rounded-lg p-3 mb-4"
+            value={email}
+            onChange={(e) =>
+              setEmail(e.target.value)
+            }
+          />
+
+          <input
+            type="password"
+            placeholder="Password"
+            className="w-full border rounded-lg p-3 mb-6"
+            value={password}
+            onChange={(e) =>
+              setPassword(e.target.value)
+            }
+          />
 
           <button
-            className="w-full bg-blue-600 text-white py-2 rounded"
             type="submit"
+            disabled={loading}
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-lg"
           >
-            Login
+            {loading ? "Signing In..." : "Login"}
           </button>
 
         </form>
+
+        <p className="text-center mt-6">
+  Don't have an account?{" "}
+  <Link
+    to="/register"
+    className="text-blue-600 font-semibold"
+  >
+    Register
+  </Link>
+</p>
 
       </div>
 
