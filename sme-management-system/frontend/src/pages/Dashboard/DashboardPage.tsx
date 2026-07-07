@@ -19,7 +19,7 @@ export default function DashboardPage() {
 
   const fetchDashboard = async () => {
     try {
-      const res = await fetch("https://miniature-goggles-pj7996pr75v9377g4-3000.app.github.dev/dashboard");
+      const res = await fetch("https://sme-higt.onrender.com/dashboard");
       const data = await res.json();
 
       setDashboard(data);
