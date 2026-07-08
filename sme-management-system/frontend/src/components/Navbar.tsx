@@ -1,4 +1,4 @@
-import logo from "../assets/hero.png";
+import logo from "../assets/logo.jpg";
 
 export default function Navbar() {
   return (
@@ -14,7 +14,7 @@ export default function Navbar() {
 
         <div>
           <h1 className="text-2xl font-bold text-slate-800">
-            Mghetto Retailer
+            MGHETTO RETAILER
           </h1>
 
           <p className="text-gray-500 text-sm">

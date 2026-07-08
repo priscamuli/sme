@@ -9,7 +9,7 @@ import {
   Cog6ToothIcon,
 } from "@heroicons/react/24/outline";
 
-import logo from "../assets/hero.png";
+import logo from "../assets/logo.jpg";
 
 const menu = [
   {
@@ -66,7 +66,7 @@ export default function Sidebar() {
         <div>
 
           <h1 className="text-xl font-bold">
-            MGhetto Retailer
+            MGHETTO RETAILER
           </h1>
 
           <p className="text-sm text-slate-400">
