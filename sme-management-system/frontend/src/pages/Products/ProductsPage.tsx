@@ -142,7 +142,6 @@ export default function ProductsPage() {
                 <thead>
                   <tr className="bg-gray-100 text-left">
                     <th className="p-3">Name</th>
-                    <th className="p-3">Buying</th>
                     <th className="p-3">Selling</th>
                     <th className="p-3">Stock</th>
                     <th className="p-3">Status</th>
@@ -155,7 +154,6 @@ export default function ProductsPage() {
                     <tr key={p.id} className="border-t hover:bg-gray-50">
 
                       <td className="p-3 font-medium">{p.name}</td>
-                      <td className="p-3">KES {p.buyingPrice}</td>
                       <td className="p-3">KES {p.sellingPrice}</td>
                       <td className="p-3 font-bold">{p.quantity}</td>
 
