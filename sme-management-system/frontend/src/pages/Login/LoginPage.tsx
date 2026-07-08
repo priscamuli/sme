@@ -51,7 +51,7 @@ export default function LoginPage() {
       <div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-md">
 
         <h1 className="text-3xl font-bold text-center mb-2">
-          SME Business Manager
+          MGHETTO RETAILER
         </h1>
 
         <p className="text-center text-gray-500 mb-8">
