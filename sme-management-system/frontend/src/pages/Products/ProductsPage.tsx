@@ -20,9 +20,9 @@ export default function ProductsPage() {
   const [form, setForm] = useState({
     name: "",
     sku: "",
-    buyingPrice: 0,
-    sellingPrice: 0,
-    quantity: 0,
+    buyingPrice: "",
+    sellingPrice: "",
+    quantity: "",
     reorderLevel: 5,
   });
 
@@ -47,9 +47,9 @@ export default function ProductsPage() {
     setForm({
       name: "",
       sku: "",
-      buyingPrice: 0,
-      sellingPrice: 0,
-      quantity: 0,
+      buyingPrice: "",
+      sellingPrice: "",
+      quantity: "",
       reorderLevel: 5,
     });
     setShowModal(true);
@@ -60,9 +60,9 @@ export default function ProductsPage() {
     setForm({
       name: p.name,
       sku: p.sku,
-      buyingPrice: p.buyingPrice,
-      sellingPrice: p.sellingPrice,
-      quantity: p.quantity,
+      buyingPrice: p.buyingPrice.toString(),
+      sellingPrice: p.sellingPrice.toString(),
+      quantity: p.quantity.toString(),
       reorderLevel: p.reorderLevel,
     });
     setShowModal(true);
@@ -73,10 +73,22 @@ export default function ProductsPage() {
 
     try {
       if (editing) {
-        await api.put(`/products/${editing.id}`, form);
+        await api.put(`/products/${editing.id}`, {
+          ...form,
+          buyingPrice: Number(form.buyingPrice),
+          sellingPrice: Number(form.sellingPrice),
+          quantity: Number(form.quantity),
+          reorderLevel: Number(form.reorderLevel),
+          });
         toast.success("Product updated");
       } else {
-        await createProduct(form);
+        await createProduct({
+          ...form,
+          buyingPrice: Number(form.buyingPrice),
+          sellingPrice: Number(form.sellingPrice),
+          quantity: Number(form.quantity),
+          reorderLevel: Number(form.reorderLevel),
+          });
         toast.success("Product created");
       }
 
@@ -247,13 +259,15 @@ export default function ProductsPage() {
     </label>
     <input
       type="number"
-      placeholder="Buying Price"
       className="border p-2 rounded w-full"
       value={form.buyingPrice}
       onChange={(e) =>
-        setForm({ ...form, buyingPrice: Number(e.target.value) })
-      }
-    />
+        setForm({
+        ...form,
+        buyingPrice: e.target.value,
+    })
+  }
+/>
   </div>
 
   <div>
@@ -262,13 +276,15 @@ export default function ProductsPage() {
     </label>
     <input
       type="number"
-      placeholder="Selling Price"
       className="border p-2 rounded w-full"
       value={form.sellingPrice}
       onChange={(e) =>
-        setForm({ ...form, sellingPrice: Number(e.target.value) })
-      }
-    />
+        setForm({
+        ...form,
+        sellingPrice: e.target.value,
+    })
+  }
+/>
   </div>
 
   <div>
@@ -277,14 +293,16 @@ export default function ProductsPage() {
     </label>
     <input
       type="number"
-      placeholder="Quantity"
       className="border p-2 rounded w-full"
       value={form.quantity}
       onChange={(e) =>
-        setForm({ ...form, quantity: Number(e.target.value) })
-      }
-    />
-  </div>
+        setForm({
+        ...form,
+        quantity: e.target.value,
+    })
+  }
+/>
+</div>
 
   <div>
     <label className="block text-sm font-medium mb-1">
