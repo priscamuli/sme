@@ -8,6 +8,7 @@ import { SalesModule } from './sales/sales.module';
 import { ExpensesModule } from './expenses/expenses.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { SettingsModule } from './settings/settings.module';
+import { AnalyticsModule } from './analytics/analytics.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { SettingsModule } from './settings/settings.module';
     ExpensesModule,
     DashboardModule,
     SettingsModule,
+    AnalyticsModule,
   ],
   controllers: [AppController],
   providers: [AppService]

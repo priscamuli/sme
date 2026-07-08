@@ -5,7 +5,7 @@ import {
   ShoppingCartIcon,
   BanknotesIcon,
   ChartBarIcon,
-  UsersIcon,
+  ChartPieIcon,
   Cog6ToothIcon,
 } from "@heroicons/react/24/outline";
 
@@ -38,9 +38,9 @@ const menu = [
     icon: ChartBarIcon,
   },
   {
-    name: "Users",
-    path: "/users",
-    icon: UsersIcon,
+    name: "Business Insights",
+    path: "/analytics",
+    icon: ChartPieIcon,
   },
   {
     name: "Settings",

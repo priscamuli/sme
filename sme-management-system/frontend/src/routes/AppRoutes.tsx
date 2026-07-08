@@ -7,6 +7,7 @@ import RegisterPage from '../pages/Register/RegisterPage';
 import ExpensesPage from '../pages/Expenses/ExpensesPage';
 import ReportsPage from '../pages/Reports/ReportsPage';
 import SettingsPage from '../Settings/SettingsPage';
+import AnalyticsPage from '../pages/Analytics/AnalyticsPage';
 
 export default function AppRoutes() {
   return (
@@ -20,6 +21,7 @@ export default function AppRoutes() {
         <Route path ="/expenses" element = {<ExpensesPage/>} />
         <Route path ="/reports" element = {<ReportsPage/>} />
         <Route path ="/settings" element = {<SettingsPage/>} />
+        <Route path ="/analytics" element = {<AnalyticsPage/>} />
       </Routes>
     </BrowserRouter>
   );
