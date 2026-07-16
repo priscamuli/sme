@@ -38,6 +38,7 @@ model Product {
   category Category? @relation(fields: [categoryId], references: [id])
 
   saleItems SaleItem[]
+  isActive Boolean @default(true)
 
   createdAt DateTime @default(now())
 }

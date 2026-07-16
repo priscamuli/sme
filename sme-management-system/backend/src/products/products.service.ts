@@ -24,12 +24,15 @@ export class ProductsService {
 }
     //GET ALL PRODUCTS
     async findAll() {
-        return prisma.product.findMany({
-            include: {
-                category: true,
-            },
-        });
-    }
+    return prisma.product.findMany({
+        where: {
+            isActive: true,
+        },
+        include: {
+            category: true,
+        },
+    });
+}
     //GET ONE PRODUCT
     async findOne(id: string){
         const product = await prisma.product.findUnique({
@@ -48,11 +51,14 @@ export class ProductsService {
         });
     }
     //DELETE PRODUCT
-    async remove(id: string){
-        return prisma.product.delete({
-            where: { id },
-        });
-    }
+    async remove(id: string) {
+    return prisma.product.update({
+        where: { id },
+        data: {
+            isActive: false,
+        },
+    });
+}
     //REDUCE STOCK (USED IN SALES LATER)
     async reduceStock(productId: string, quantity: number) {
         const product = await this.findOne(productId);
