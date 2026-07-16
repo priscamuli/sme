@@ -34,7 +34,7 @@ export default function ReportsPage() {
   const [sales, setSales] = useState<Sale[]>([]);
   const [expenses, setExpenses] = useState<Expense[]>([]);
   const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [, setLoading] = useState(true);
 
   useEffect(() => {
     loadReports();
@@ -79,6 +79,9 @@ export default function ReportsPage() {
 
   return (
     <AdminLayout>
+      <div className="flex items-center justify-center h-[70vh]">
+        <p className="text-lg text-gray-500">Loading reports...</p>
+      </div>
   <div className="space-y-6">
 
     <ReportHeader />
