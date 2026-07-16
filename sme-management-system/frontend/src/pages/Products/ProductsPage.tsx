@@ -19,7 +19,6 @@ export default function ProductsPage() {
 
   const [form, setForm] = useState({
     name: "",
-    sku: "",
     buyingPrice: "",
     sellingPrice: "",
     quantity: "",
@@ -46,7 +45,6 @@ export default function ProductsPage() {
     setEditing(null);
     setForm({
       name: "",
-      sku: "",
       buyingPrice: "",
       sellingPrice: "",
       quantity: "",
@@ -59,7 +57,6 @@ export default function ProductsPage() {
     setEditing(p);
     setForm({
       name: p.name,
-      sku: p.sku,
       buyingPrice: p.buyingPrice.toString(),
       sellingPrice: p.sellingPrice.toString(),
       quantity: p.quantity.toString(),
@@ -228,7 +225,7 @@ export default function ProductsPage() {
 
               {/* FORM */}
               <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-3">
-
+ 
   <div>
     <label className="block text-sm font-medium mb-1">
       Product Name
@@ -238,18 +235,6 @@ export default function ProductsPage() {
       className="border p-2 rounded w-full"
       value={form.name}
       onChange={(e) => setForm({ ...form, name: e.target.value })}
-    />
-  </div>
-
-  <div>
-    <label className="block text-sm font-medium mb-1">
-      Product SKU
-    </label>
-    <input
-      placeholder="SKU"
-      className="border p-2 rounded w-full"
-      value={form.sku}
-      onChange={(e) => setForm({ ...form, sku: e.target.value })}
     />
   </div>
 

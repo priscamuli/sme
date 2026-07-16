@@ -5,10 +5,23 @@ import prisma from "../prisma/client";
 export class ProductsService {
     // CREATE PRODUCT
     async create(data: any) {
-        return prisma.product.create({
-            data,
-        });
-    }
+    // Get the next number from the PostgreSQL sequence
+    const result = await prisma.$queryRaw<{ nextval: bigint }[]>`
+        SELECT nextval('product_sku_seq')
+    `;
+
+    const nextNumber = Number(result[0].nextval);
+
+    // Generate the SKU
+    const sku = `MGHETTO${nextNumber.toString().padStart(4, '0')}`;
+
+    return prisma.product.create({
+        data: {
+            ...data,
+            sku,
+        },
+    });
+}
     //GET ALL PRODUCTS
     async findAll() {
         return prisma.product.findMany({
